@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TextPredictionLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:Text_Prediction.BKTree">
+            <summary>
+            A tree for autocorrect
+            </summary>
+        </member>
+        <member name="M:Text_Prediction.BKTree.Add(System.String)">
+            <summary>
+            Add a word to the BK-Tree.
+            </summary>
+            <param name="word"></param>
+        </member>
+        <member name="M:Text_Prediction.BKTree.Search(System.String,System.Int32)">
+            <summary>
+            Search an alternative word in the BK tree
+            </summary>
+            <param name="word"></param>
+            <param name="d"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Text_Prediction.BKTree.RecursiveSearch(Text_Prediction.Node,System.Collections.Generic.List{System.String},System.String,System.Int32)">
+            <summary>
+            Recursive function to search for closest word. Cannot to be called explicity
+            </summary>
+            <param name="node">A node variable of the BK-Tree</param>
+            <param name="rtn">A list containing possible alternatives to "word"</param>
+            <param name="word">A word whose alternative is being searched</param>
+            <param name="d">maximum allowed edit distance</param>
+        </member>
+        <member name="M:Text_Prediction.BKTree.LevenshteinDistance(System.String,System.String)">
+            <summary>
+            calculate Levensthein distance
+            </summary>
+            <param name="first">First String</param>
+            <param name="second">Second String</param>
+            <returns>edit distance</returns>
+        </member>
+        <member name="M:Text_Prediction.BKTree.DamLevDistance(System.String,System.String)">
+            <summary>
+            calculate Damerau Levenshtein distance
+            </summary>
+            <param name="first">First String</param>
+            <param name="second">Second String</param>
+            <returns>edit distance</returns>
+        </member>
+        <member name="M:Text_Prediction.BKTree.VarChiDamLevDistance(System.String,System.String)">
+            <summary>
+            edit distance for Hindi
+            </summary>
+            <param name="first">First String</param>
+            <param name="second">Second String</param>
+            <returns>edit distance</returns>
+        </member>
+        <member name="P:Text_Prediction.BKTree.TreeSize">
+            <summary>
+            Returns the tree size
+            </summary>
+        </member>
+        <member name="T:Text_Prediction.Node">
+            <summary>
+            Node structure of the BK tree
+            </summary>
+        </member>
+        <member name="T:Text_Prediction.SuggestDictionary">
+            <summary>
+            This class handles the bigram pairs
+            </summary>
+        </member>
+        <member name="M:Text_Prediction.SuggestDictionary.getHashSuggestions(System.String)">
+            <summary>
+            Get next word suggestion on the basis of bigram pairs
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Text_Prediction.SuggestDictionary.getAutoSuggestSuggestions(System.String)">
+            <summary>
+            give a reduced autocomplete list based on next words.
+            </summary>
+            <param name="prefix">Incomplete word</param>
+            <returns>A list of possible suggestions</returns>
+        </member>
+        <member name="T:Text_Prediction.TernarySearchTree">
+            <summary>
+            This class contains methods to handle the Ternary Search Tree Data Structure, to store the data dictionary efficiently. 
+            </summary>
+        </member>
+        <member name="F:Text_Prediction.TernarySearchTree.root">
+            <summary>
+            A root node for the tree.
+            </summary>
+        </member>
+        <member name="M:Text_Prediction.TernarySearchTree.createRoot(System.Char)">
+            <summary>
+            A method to initialize the root node.Call this method before inserting the dictionary into the tree.
+            </summary>
+            <param name="c">Inserting a character which is in the .middle of the language character set is recommended.</param>
+        </member>
+        <member name="M:Text_Prediction.TernarySearchTree.insert(Text_Prediction.TSTNode,System.String,System.Int32,System.Int32)">
+            <summary>
+            Recursive search function. Not to be called explicitly
+            </summary>
+            <param name="node">TST node</param>
+            <param name="word">A simple string</param>
+            <param name="pos">pointer position in the word</param>
+            <param name="frequency">frequency of the word</param>
+            <returns></returns>
+        </member>
+        <member name="M:Text_Prediction.TernarySearchTree.insert(System.String,System.Int32)">
+            <summary>
+            insert words into the tree
+            </summary>
+            <param name="word">A normal word</param>
+            <param name="frequency">The pre-decided frequency count in the dictionary</param>
+        </member>
+        <member name="M:Text_Prediction.TernarySearchTree.search(Text_Prediction.TSTNode,System.String)">
+            <summary>
+            recursive search funciton. Not to be called explicitly
+            </summary>
+            <param name="node">TST node</param>
+            <param name="str">A simple String</param>
+        </member>
+        <member name="M:Text_Prediction.TernarySearchTree.search(System.String)">
+            <summary>
+            A function to search the possible words based on the prefix entry.
+            </summary>
+            <param name="prefix">An incomplete or complete word</param>
+            <returns>A list of words</returns>
+        </member>
+        <member name="M:Text_Prediction.TernarySearchTree.getAutoCompleteSuggestions(System.String)">
+            <summary>
+            Returns the specified no. of suggestions
+            </summary>
+            <param name="prefix">Initial matching prefix String</param>
+            <returns>A list with suggestions ranked highest to lowest based on frequency</returns>
+        </member>
+        <member name="T:Text_Prediction.TSTNode">
+            <summary>
+            Ternary Search Tree node
+            </summary>
+        </member>
+        <member name="T:Text_Prediction.Prediction">
+            <summary>
+            This class contains all the methods which are needed to implement Text Prediction
+            </summary>
+        </member>
+        <member name="M:Text_Prediction.Prediction.#ctor(System.String)">
+            <summary>
+            Prediction Class Constructor
+            </summary>
+            <param name="source">Absolute path of dictionary file</param>
+        </member>
+        <member name="M:Text_Prediction.Prediction.createInitialStructures(System.String)">
+            <summary>
+            Create all structures
+            </summary>
+            <param name="source">Absolute path of dictionary file</param>
+        </member>
+        <member name="M:Text_Prediction.Prediction.createAutoCompleteTree(System.String)">
+            <summary>
+            Create autocomplete tree
+            </summary>
+            <param name="source">Absolute path of dictionary</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Text_Prediction.Prediction.createSuggestDictionary(System.String)" -->
+        <member name="M:Text_Prediction.Prediction.createBKTree(System.String)">
+            <summary>
+            generate the BKTree
+            </summary>
+            <param name="source">Absolute path of dictionary file</param>
+        </member>
+        <member name="M:Text_Prediction.Prediction.getAutoCompleteSuggestions(System.String)">
+            <summary>
+            Suggest the probable word based on the dictionary in descending order
+            </summary>
+            <param name="input">an incomplete word</param>
+            <returns>A list of probable words generated by prefix matching</returns>
+        </member>
+        <member name="M:Text_Prediction.Prediction.getAutoSuggestWordSuggestions(System.String)">
+            <summary>
+            Similar to Autocomplete but with a reduced no of words as given by the getNextWordSuggestions.Use after next word suggestions
+            as an alternative for autocomplete so that the unrelated words are ignored
+            </summary>
+            <param name="prefix">An incomplete word entry</param>
+            <returns>a list of possible words based on prefix matching to prefix</returns>
+        </member>
+        <member name="M:Text_Prediction.Prediction.getNextWordSuggestions(System.String)">
+            <summary>
+            Predict the next word after current input
+            </summary>
+            <param name="input">A word whose next probable word needs to be predicted</param>
+            <returns>A list of strings which contains probable words in descending order</returns>
+        </member>
+        <member name="M:Text_Prediction.Prediction.getAutoCorrectSuggestions(System.String)">
+            <summary>
+            Gives the autocorrect alternatives
+            </summary>
+            <param name="input">the word which is suspected to be incorrect </param>
+            <returns>A list of suggestions which can serve as an alternative to the input</returns>
+        </member>
+        <member name="M:Text_Prediction.Prediction.learnData(System.String,System.Boolean)">
+            <summary>
+            Function Updates the dictionary to include new words in the RAM
+            </summary>
+            <param name="inputText">Pass the data to be learned here</param>
+            <param name="addNewWordsCond">This boolean value specifies whether or not new words should be learned.true if yes. False if new 
+            words are to be ignored</param>
+        </member>
+        <member name="M:Text_Prediction.Prediction.commit(System.String)">
+            <summary>
+            commit the changes made by learnData to the disk
+            </summary>
+            <param name="destination">Name of the target file</param>
+        </member>
+        <member name="M:Text_Prediction.Prediction.getAllPredictions(System.String,System.Int32)">
+            <summary>
+            A text changed event handler
+            </summary>
+            <param name="input">The input from a text field on which we want to apply text prediction</param>
+            <param name="limit">The maximum no. of suggestions returned by this method</param>
+            <returns>A list of strings which will be the most probable based on previous input</returns>
+        </member>
+        <member name="T:Text_Prediction.ThreadSafeRandom">
+            <summary>
+            Safe threading for Shuffling
+            </summary>
+        </member>
+        <member name="T:Text_Prediction.MyExtensions">
+            <summary>
+            This class is used to shuffle the dictionary entries.
+            </summary>
+        </member>
+        <member name="M:Text_Prediction.MyExtensions.Shuffle``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Shuffle a List
+            </summary>
+            <typeparam name="T">Generic Type</typeparam>
+            <param name="list">An Ilist object</param>
+        </member>
+    </members>
+</doc>
